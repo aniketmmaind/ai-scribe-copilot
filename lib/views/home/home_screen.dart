@@ -30,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (BlocProvider.of<PatientBloc>(context).state.patientListModel == null ||
         BlocProvider.of<PatientBloc>(context).state.patientStatus ==
             PatientStatus.initial) {
+      //only work at first time when visit this screen
       context.read<PatientBloc>().add(LoadInitialPatientListEvent());
     }
 
