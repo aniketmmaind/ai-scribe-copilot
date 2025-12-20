@@ -1,0 +1,4 @@
+# for localization
+arb-dir: assets/l10n
+template-ab-file: app_en.arb
+output-localization-file: app_localizations.dart
