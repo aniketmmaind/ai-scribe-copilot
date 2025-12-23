@@ -41,7 +41,7 @@ class Session {
   Session copyWith({
     String? id,
     DateTime? date,
-    dynamic? sessionTitle,
+    dynamic sessionTitle,
     String? sessionSummary,
     DateTime? startTime,
   }) {

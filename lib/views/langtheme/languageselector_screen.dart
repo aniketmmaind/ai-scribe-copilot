@@ -57,7 +57,11 @@ class _LanguageSelectorScreenState extends State<LanguageSelectorScreen>
               const SizedBox(height: 30),
 
               // IMAGE
-              Image.asset('assets/images/app_icon.png', width: 260, height: 260),
+              Image.asset(
+                'assets/images/app_icon.png',
+                width: 260,
+                height: 260,
+              ),
 
               const SizedBox(height: 40),
 

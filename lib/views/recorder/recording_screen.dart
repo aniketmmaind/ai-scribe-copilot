@@ -1,6 +1,5 @@
 import 'package:ai_scribe_copilot/bloc/recorder/recorder_bloc.dart';
 import 'package:ai_scribe_copilot/bloc/recorder/recorder_state.dart';
-import 'package:ai_scribe_copilot/services/storage/local_db.dart';
 import 'package:ai_scribe_copilot/utils/app_bar_util.dart';
 import 'package:ai_scribe_copilot/utils/enums.dart';
 import 'package:ai_scribe_copilot/utils/snackbar_util.dart';
@@ -23,15 +22,23 @@ part 'widgets/recording_app_bar.dart';
 part 'widgets/audio_route_indicator.dart';
 part 'widgets/live_transcript_view.dart';
 
-class RecordingScreen extends StatelessWidget {
+class RecordingScreen extends StatefulWidget {
   final Map<String, dynamic>? args;
 
   const RecordingScreen({super.key, this.args});
 
   @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+  State<RecordingScreen> createState() => _RecordingScreenState();
+}
 
+class _RecordingScreenState extends State<RecordingScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
       appBar: RecordingAppBar(
@@ -117,55 +124,36 @@ class RecordingScreen extends StatelessWidget {
 
                     const SizedBox(height: 20),
 
-                    // Check Queue Button
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton.icon(
-                        icon: const Icon(Icons.queue_music),
-                        label: const Text("Check Queue"),
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          backgroundColor: theme.colorScheme.primary,
-                        ),
-                        onPressed: () async {
-                          final rows = await LocalDb.instance.query(
-                            'pending_chunks',
-                          );
+                    // Check Queue Button just for testing
+                    //i.e. data is adding to queue or not for async data transfer
+                    // SizedBox(
+                    //   width: double.infinity,
+                    //   child: ElevatedButton.icon(
+                    //     icon: const Icon(Icons.queue_music),
+                    //     label: const Text("Check Queue"),
+                    //     style: ElevatedButton.styleFrom(
+                    //       padding: const EdgeInsets.symmetric(vertical: 14),
+                    //       shape: RoundedRectangleBorder(
+                    //         borderRadius: BorderRadius.circular(12),
+                    //       ),
+                    //       backgroundColor: theme.colorScheme.primary,
+                    //     ),
+                    //     onPressed: () async {
+                    //       final rows = await LocalDb.instance.query(
+                    //         'pending_chunks',
+                    //       );
 
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Queued: ${rows.length}')),
-                          );
-                          LocalDb.instance.delete(
-                            'pending_chunks',
-                            "status = ?",
-                            ["pending"],
-                          );
-                        },
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    ElevatedButton.icon(
-                      icon: const Icon(Icons.share, color: Colors.amber),
-                      label: const Text("Share Transcript"),
-                      onPressed: () {
-                        final transcript =
-                            context.read<RecorderBloc>().state.liveTranscript;
-                        String patientName =
-                            context
-                                .read<PatientDetailBloc>()
-                                .state
-                                .patientDetailModel!
-                                .name!;
-                        ShareUtil.shareTranscriptAsTxt(
-                          context,
-                          transcript,
-                          patientName: patientName,
-                        );
-                      },
-                    ),
+                    //       ScaffoldMessenger.of(context).showSnackBar(
+                    //         SnackBar(content: Text('Queued: ${rows.length}')),
+                    //       );
+                    //       LocalDb.instance.delete(
+                    //         'pending_chunks',
+                    //         "status = ?",
+                    //         ["pending"],
+                    //       );
+                    //     },
+                    //   ),
+                    // ),
                   ],
                 ),
               );

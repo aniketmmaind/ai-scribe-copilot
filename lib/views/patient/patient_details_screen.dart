@@ -3,6 +3,7 @@ import 'package:ai_scribe_copilot/config/routes/routes_name.dart';
 import 'package:ai_scribe_copilot/services/haptic_manager/haptic_controller.dart';
 import 'package:ai_scribe_copilot/utils/app_button_util.dart';
 import 'package:ai_scribe_copilot/utils/enums.dart';
+import 'package:ai_scribe_copilot/utils/failure_util.dart';
 import 'package:ai_scribe_copilot/utils/snackbar_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,12 +32,18 @@ class PatientDetailScreen extends StatelessWidget {
           builder: (context, state) {
             switch (state.status) {
               case PatientDetailsStatus.loading:
-                return Center(child: CircularProgressIndicator());
+                return SizedBox(
+                  height: MediaQuery.of(context).size.height - 200,
+                  child: Center(child: CircularProgressIndicator()),
+                );
               case PatientDetailsStatus.success:
                 return _patientDetails(state.patientDetailModel!, context);
               case PatientDetailsStatus.failure:
-                return Center(
-                  child: Text("Somthing Wents wrong, Try again later!!"),
+                return SizedBox(
+                  height: MediaQuery.of(context).size.height - 200,
+                  child: FailureUtil(
+                    message: AppLocalizations.of(context)!.tryLaterTxt,
+                  ),
                 );
               default:
                 return Center(child: Text("PatientDetails"));

@@ -36,6 +36,7 @@ class PatientDetailBloc extends Bloc<PatientDetailEvent, PatientDetailState> {
             patientDetailModel: _cache[id],
           ),
         );
+        return;
       }
       final patientListModel = await _fetchPatientDetails
           .fetchPatientByPatientId({

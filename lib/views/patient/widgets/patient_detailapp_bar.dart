@@ -14,15 +14,20 @@ class PatientDetailAppBar extends StatelessWidget
         IconButton(
           tooltip: AppLocalizations.of(context)!.sessionlstTxt,
           onPressed: () {
-            String patientId =
-                context
-                    .read<PatientDetailBloc>()
-                    .state
-                    .patientDetailModel!
-                    .patientId!;
-            context.read<SessionBloc>().add(
-              LoadInitialSesionListEvent(patientId: patientId),
-            );
+            PatientDetailsStatus status =
+                context.read<PatientDetailBloc>().state.status;
+
+            if (status == PatientDetailsStatus.initial) {
+              String patientId =
+                  context
+                      .read<PatientDetailBloc>()
+                      .state
+                      .patientDetailModel!
+                      .patientId!;
+              context.read<SessionBloc>().add(
+                LoadInitialSesionListEvent(patientId: patientId),
+              );
+            }
             Navigator.pushNamed(context, RoutesName.sessionListScreen);
           },
           icon: Icon(Icons.history),

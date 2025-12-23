@@ -1,7 +1,5 @@
 part of 'login_bloc.dart';
 
-
-
 class LoginState extends Equatable {
   final LoginStatus status;
   final User? userModel;
@@ -34,5 +32,5 @@ class LoginState extends Equatable {
   }
 
   @override
-  List<Object?> get props => [status, userModel, message,email, password];
+  List<Object?> get props => [status, userModel, message, email, password];
 }

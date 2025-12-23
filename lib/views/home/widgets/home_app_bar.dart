@@ -3,16 +3,11 @@ import 'package:flutter/material.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  
 
-  const HomeAppBar({
-    super.key,
-    required this.title,
-  });
+  const HomeAppBar({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
-
     return AppBarUtil(title: title);
   }
 

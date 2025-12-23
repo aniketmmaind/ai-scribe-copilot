@@ -56,8 +56,8 @@ class _SessionListScreenState extends State<SessionListScreen> {
                 case SessionStatus.failure:
                   return FailureUtil();
                 case SessionStatus.success:
-                  final sessionList = state.sessionModel!.sessions;
-                  if (sessionList.isEmpty) {
+                  final sessionList = state.sessionModel?.sessions;
+                  if (sessionList!.isEmpty) {
                     return EmptyListUtil(
                       title: AppLocalizations.of(context)!.noSessionTxt,
                       message:
@@ -78,6 +78,18 @@ class _SessionListScreenState extends State<SessionListScreen> {
                     message:
                         "${AppLocalizations.of(context)!.pullrefTxt} ${AppLocalizations.of(context)!.sessiPullTxt}",
                     icon: Icons.mic_none_outlined,
+                    onAction: () {
+                      final String patientId =
+                          context
+                              .read<PatientDetailBloc>()
+                              .state
+                              .patientDetailModel!
+                              .patientId!;
+                      context.read<SessionBloc>().add(
+                        RefreshSessionListEvet(patientId: patientId),
+                      );
+                    },
+                    actionText: "Refresh",
                   );
               }
             },

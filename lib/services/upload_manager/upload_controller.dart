@@ -3,7 +3,8 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:ai_scribe_copilot/repositories/recording/recording_session_repo.dart';
 import 'package:ai_scribe_copilot/services/session_manager/session_controller.dart';
-import '../../models/pending_chunk.dart';
+import 'package:flutter/foundation.dart';
+import '../../models/pending_chunk/pending_chunk_model.dart';
 import '../storage/local_db.dart';
 import '../../utils/pcmtowav_util.dart';
 
@@ -13,7 +14,7 @@ class UploadController {
   UploadController();
 
   /// Called immediately after saving chunk
-  Future<void> tryUploadNow(PendingChunk chunk) async {
+  Future<void> tryUploadNow(PendingChunkModel chunk) async {
     final success = await _upload(chunk);
 
     if (success) {
@@ -32,7 +33,7 @@ class UploadController {
       final rows = await LocalDb.instance.query("pending_chunks");
       if (rows.isEmpty) break;
 
-      final chunk = PendingChunk.fromMap(rows.first);
+      final chunk = PendingChunkModel.fromMap(rows.first);
       final ok = await _upload(chunk);
       if (ok) {
         await LocalDb.instance.delete("pending_chunks", "id = ?", [chunk.id]);
@@ -45,7 +46,7 @@ class UploadController {
   }
 
   /// The actual uploader
-  Future<bool> _upload(PendingChunk chunk) async {
+  Future<bool> _upload(PendingChunkModel chunk) async {
     try {
       final file = File(chunk.localFilePath);
       if (!file.existsSync()) return false;
@@ -65,7 +66,7 @@ class UploadController {
           "mimeType": chunk.mimeType,
         },
       );
-
+      // debugPrint("presigned url: ${presigned.toJson()}");
       final url = presigned.url;
       final response = await _recordingRepo.setRecording(url!, {
         'Content-Type': chunk.mimeType,
@@ -74,6 +75,13 @@ class UploadController {
 
       if (response == false) {
         return false;
+      }
+
+      if (response == true) {
+        if (file.existsSync()) {
+          // debugPrint("file delete: ${file.path}");
+          await file.delete();
+        }
       }
 
       // Notify backend

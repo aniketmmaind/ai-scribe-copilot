@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-class PendingChunk {
+class PendingChunkModel {
   String id;
   String sessionId;
   int chunkNumber;
   String localFilePath; // path to chunk wav file
-  String gcsPath; // remote object path (from /get-presigned-url response)
+  String gcsPath;
   String publicUrl;
   String mimeType;
   bool isLast;
@@ -14,7 +14,7 @@ class PendingChunk {
   String? liveTranscript;
   int createdAt;
 
-  PendingChunk({
+  PendingChunkModel({
     required this.id,
     required this.sessionId,
     required this.chunkNumber,
@@ -46,8 +46,8 @@ class PendingChunk {
     };
   }
 
-  static PendingChunk fromMap(Map<String, dynamic> m) {
-    return PendingChunk(
+  static PendingChunkModel fromMap(Map<String, dynamic> m) {
+    return PendingChunkModel(
       id: m['id'],
       sessionId: m['sessionId'],
       chunkNumber: m['chunkNumber'],

@@ -20,19 +20,18 @@ class DeepgramStreamingService {
       '&channels=1'
       '&punctuate=true'
       '&interim_results=true'
-      '&model=nova-2-medical',
+      '&model=nova-2',
     );
 
     _channel = IOWebSocketChannel.connect(
       uri,
       headers: {'Authorization': 'Token $apiKey'},
     );
-
     _channel!.stream.listen(_handleMessage);
   }
 
   void sendPcm(Uint8List pcm) {
-   _channel?.sink.add(pcm);
+    _channel?.sink.add(pcm);
   }
 
   void _handleMessage(dynamic message) {

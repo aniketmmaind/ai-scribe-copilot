@@ -170,7 +170,7 @@ class AddPatientBloc extends Bloc<AddPatientEvent, AddPatientState> {
   ) {
     emit(
       state.copyWith(
-        /// Reset model to initial values
+        // Reset model to initial values
         patientRequestModel: PatientDetailModel(
           name: "",
           userId: "",

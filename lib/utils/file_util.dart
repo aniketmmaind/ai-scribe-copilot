@@ -11,8 +11,10 @@ class FileUtil {
     final dir = await getTemporaryDirectory();
 
     final timestamp = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
-    final safePatient =
-        (patientName ?? 'patient').replaceAll(RegExp(r'\s+'), '_');
+    final safePatient = (patientName ?? 'patient').replaceAll(
+      RegExp(r'\s+'),
+      '_',
+    );
 
     final fileName = 'Transcript_${safePatient}_$timestamp.txt';
     final file = File('${dir.path}/$fileName');

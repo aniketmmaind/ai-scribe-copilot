@@ -21,6 +21,8 @@
         android:label="Medinote"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true"
+        android:foregroundServiceType="microphone"
         android:requestLegacyExternalStorage="true">
         <service
             android:name="com.dexterous.flutterlocalnotifications.ForegroundService"

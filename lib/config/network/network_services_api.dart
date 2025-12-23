@@ -13,7 +13,6 @@ class NetworkServicesApi implements BaseApiServices {
   @override
   Future<dynamic> getApi(String url, var headers) async {
     return _handleRequest((token) {
-      print("get : $url");
       return http
           .get(
             Uri.parse(url),
@@ -25,11 +24,7 @@ class NetworkServicesApi implements BaseApiServices {
 
   @override
   Future postApi(String url, var body, var headers) async {
-    print("url: $url");
-    print("body: ${body.toString()}");
-    print("headers: ${headers.toString()}");
     return _handleRequest((token) {
-      print("token: $token");
       return http
           .post(
             Uri.parse(url),
@@ -99,16 +94,13 @@ class NetworkServicesApi implements BaseApiServices {
         throw ("A network error occurred.");
       }
     } catch (e) {
-      print("e: ${e.toString()}");
+      // debugPrint("e: ${e.toString()}");
       throw ("An unexpected error occurred.");
     }
   }
 
   Future<bool> _refreshToken() async {
     final refreshToken = SessionController.refreshToken;
-    final authToken = SessionController.authToken;
-    print("refreshToken: $refreshToken");
-    print("authToken: $authToken");
     if (refreshToken == null) return false;
     final response = await http.post(
       Uri.parse("${AppUrls.baseUrl}/api/auth/refresh"),
@@ -147,7 +139,6 @@ class NetworkServicesApi implements BaseApiServices {
       case 401:
         final jsonResponse = jsonDecode(response.body);
         final code = jsonResponse['code'];
-        print("code: $code");
         if (code == 'TOKEN_EXPIRED') {
           throw TokenExpiredException(message: jsonResponse['message']);
         }

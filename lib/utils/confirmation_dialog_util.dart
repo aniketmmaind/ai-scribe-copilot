@@ -11,7 +11,7 @@ class ConfirmationDialogUtil {
   }) async {
     final result = await showDialog<bool>(
       context: context,
-      barrierDismissible: false, 
+      barrierDismissible: false,
       builder: (context) {
         return AlertDialog(
           title: Text(title),

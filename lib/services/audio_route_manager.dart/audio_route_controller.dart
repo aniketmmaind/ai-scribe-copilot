@@ -13,7 +13,7 @@ class AudioRouteListener {
   Stream<AudioRouteStatus> get stream => _controller.stream;
 
   Future<void> start() async {
-     await _channel.invokeMethod('start');
+    await _channel.invokeMethod('start');
 
     _channel.setMethodCallHandler((call) async {
       if (call.method == 'onRouteChanged') {

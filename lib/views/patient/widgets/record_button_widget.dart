@@ -11,6 +11,10 @@ class RecordButtonWidget extends StatelessWidget {
         text: AppLocalizations.of(context)!.recordTxt,
         isLoading: false,
         onPressed: () {
+          //
+          final PatientDetailsStatus patientStatus =
+              context.read<PatientDetailBloc>().state.status;
+
           //first to check wheather usser is bussy in another user recording if not then navigate.
           final String recPatientId =
               context.read<RecorderBloc>().state.patientId ?? "";
@@ -23,9 +27,18 @@ class RecordButtonWidget extends StatelessWidget {
           final RecordingStatus recordingStatus =
               context.read<RecorderBloc>().state.status;
 
+          if (patientStatus != PatientDetailsStatus.success) {
+            SnackbarUtil.showSnckBar(
+              context,
+              "Patient Details are not fetched..",
+            );
+            return;
+          }
+
           if ((recPatientId == patientId) ||
               (recordingStatus == RecordingStatus.stopped ||
-                  recordingStatus == RecordingStatus.idle)) {
+                  recordingStatus == RecordingStatus.idle ||
+                  recordingStatus == RecordingStatus.error)) {
             HapticFeedbackManager.trigger(HapticType.success);
             Navigator.pushNamed(context, RoutesName.recordingScreen);
             return;

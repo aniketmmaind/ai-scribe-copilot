@@ -2,6 +2,7 @@ import 'package:ai_scribe_copilot/bloc/patient_details/patient_detail_bloc.dart'
 import 'package:ai_scribe_copilot/bloc/session/session_bloc.dart';
 import 'package:ai_scribe_copilot/config/routes/routes_name.dart';
 import 'package:ai_scribe_copilot/utils/app_bar_util.dart';
+import 'package:ai_scribe_copilot/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -28,9 +29,7 @@ class PatientInfoSection extends StatelessWidget {
         children: [
           SectionTitle(title: title),
           const SizedBox(height: 12),
-          ...data.entries.map(
-            (e) => InfoRow(label: e.key, value: e.value),
-          ),
+          ...data.entries.map((e) => InfoRow(label: e.key, value: e.value)),
         ],
       ),
     );

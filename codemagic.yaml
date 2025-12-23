@@ -1,0 +1,23 @@
+workflows:
+  medinote_free_build:
+    name: Medinote Free CI Build
+    environment:
+      flutter: stable
+      vars:
+        BASE_URL: $BASE_URL
+        DEEPGRAM_API_KEY: $DEEPGRAM_API_KEY
+
+    scripts:
+      - flutter pub get
+
+      # Create .env file dynamically
+      - |
+        echo "BASE_URL=$BASE_URL" >> .env
+        echo "DEEPGRAM_API_KEY=$DEEPGRAM_API_KEY" >> .env
+
+      - flutter build apk --release
+      - flutter build web
+
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+      - build/web/**

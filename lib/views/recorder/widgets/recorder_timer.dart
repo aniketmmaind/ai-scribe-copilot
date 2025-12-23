@@ -1,4 +1,5 @@
 part of '../recording_screen.dart';
+
 class RecorderTimer extends StatelessWidget {
   final Duration duration;
 
@@ -15,9 +16,7 @@ class RecorderTimer extends StatelessWidget {
 
     return Text(
       "$minutes:$seconds",
-      style: textTheme.displayMedium!.copyWith(
-        fontWeight: FontWeight.bold,
-      ),
+      style: textTheme.displayMedium!.copyWith(fontWeight: FontWeight.bold),
     );
   }
 }

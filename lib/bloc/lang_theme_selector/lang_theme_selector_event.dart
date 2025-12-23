@@ -9,6 +9,7 @@ abstract class LanguageThemeSelectorEvent extends Equatable {
 
 // Load saved language from secure storage
 class LoadSavedLanguageEvent extends LanguageThemeSelectorEvent {}
+
 class ChangeLanguageEvent extends LanguageThemeSelectorEvent {
   final Locale locale;
 
@@ -20,6 +21,7 @@ class ChangeLanguageEvent extends LanguageThemeSelectorEvent {
 
 //  Load saved theme from secure storage
 class LoadSavedThemeEvent extends LanguageThemeSelectorEvent {}
+
 class ChangeThemeEvent extends LanguageThemeSelectorEvent {
   final ThemeMode themeMode;
 

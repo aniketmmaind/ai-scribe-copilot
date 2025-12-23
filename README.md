@@ -10,10 +10,56 @@ The app is integrated with a **Node.js backend deployed on Google Cloud Run**.
 - 🔐 User Authentication (JWT-based)
 - 👨‍⚕️ Patient Management
 - 🎙️ Real-time Audio Recording based on 2sec audio chunk.
-- 🧠 Real-time Transcription using **Deepgram**
+- 🧠 Real-time Transcription using **speech_to_text** package
+- 🧠 Deepgram websocket is also implement as backup for live transcript you can use them **Deepgram**
 - ☁️ Backend hosted on **Google Cloud Run**
 - 📦 Dockerized backend
 - 📱 Android & iOS support
+
+---
+
+## 🔄 Application Flow Diagram
+
+```mermaid
+%%{init: {
+  "flowchart": {
+    "nodeSpacing": 5,
+    "rankSpacing": 20
+  },
+  "themeVariables": {
+    "fontSize": "10px",
+    "padding": "4px"
+  }
+}}%%
+flowchart TD
+    A[App<br/>Launch] --> B{JWT<br/>Exists?}
+    B -- No --> C[Login]
+    B -- Yes --> D[Home]
+
+    C --> D
+    D --> E[Patients]
+    E --> F[Select / Add]
+    F --> G[Start<br/>Recording]
+
+    G --> H[PCM Audio<br/>2s]
+    H --> I{On-device<br/>STT?}
+
+    I -- Yes --> J[Local STT]
+    I -- No --> K[Deepgram WS]
+
+    J --> L[Live UI<br/>Text + Wave]
+    K --> L
+
+    L --> M[Upload<br/>Chunks]
+    M --> N[Backend<br/>Cloud Run]
+
+    N --> O[GCS<br/>Audio]
+    N --> P[MongoDB<br/>Meta]
+
+    L --> Q[Stop]
+    Q --> R[Save<br/>Transcript]
+
+```
 
 ---
 
@@ -26,9 +72,9 @@ The app is integrated with a **Node.js backend deployed on Google Cloud Run**.
 
 ---
 
-## 🎥 iOS Demo Video (Loom)
+## 🎥 Demo Video (Loom)
 
-👉 **iOS Demo Video (All Features)**  
+👉 **Demo Video (All Features)**  
 <https://loom.com/share/><your-loom-video-id>
 
 > This video demonstrates authentication, patient flow, audio recording, and transcription.
@@ -89,6 +135,8 @@ The app uses Deepgram for real-time speech-to-text during audio recording.
 ```cmd
 flutter --version
 ```
+
+```output:```
 
 ```ver
 Flutter 3.29.1 • channel stable • https://github.com/flutter/flutter.git

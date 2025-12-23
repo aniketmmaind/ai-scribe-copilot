@@ -2,21 +2,22 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:ai_scribe_copilot/bloc/recorder/recorder_event.dart';
 import 'package:ai_scribe_copilot/bloc/recorder/recorder_state.dart';
-import 'package:ai_scribe_copilot/models/pending_chunk.dart';
 import 'package:ai_scribe_copilot/repositories/recording/recording_session_repo.dart';
 import 'package:ai_scribe_copilot/services/haptic_manager/haptic_controller.dart';
 import 'package:ai_scribe_copilot/services/storage/local_db.dart';
 import 'package:ai_scribe_copilot/services/permission_manager/permission_controller.dart';
 import 'package:ai_scribe_copilot/services/recorder_manager/recorder_service.dart';
-import 'package:ai_scribe_copilot/services/transcript_manager/deepgram_streaming_service.dart';
 import 'package:ai_scribe_copilot/services/upload_manager/upload_controller.dart';
 import 'package:ai_scribe_copilot/utils/date_time_formater_util.dart';
 import 'package:ai_scribe_copilot/utils/enums.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:uuid/uuid.dart';
+import '../../models/pending_chunk/pending_chunk_model.dart';
 import '../../services/notification_manager/notification_service.dart';
 import '../../services/session_manager/session_controller.dart';
+import '../../services/transcript_manager/deepgram_streaming_service.dart';
 
 class RecorderBloc extends Bloc<RecorderEvent, RecorderState> {
   Timer? _timer;
@@ -24,6 +25,9 @@ class RecorderBloc extends Bloc<RecorderEvent, RecorderState> {
   late RecorderService _recorder;
   final _uploadManager = UploadController();
   late DeepgramStreamingService _deepgram;
+  // late OnDeviceSpeechController _onDeviceSpeech; // to use Native API for speech to text i.e.
+  //for transcript uncomment all _onDeviceSpeech obj and comment _onDeviceSpeech.
+  //but it is restricted in release apk mic can't give access to both services
 
   RecorderBloc()
     : super(
@@ -49,10 +53,23 @@ class RecorderBloc extends Bloc<RecorderEvent, RecorderState> {
   void _onStart(StartRecording event, Emitter<RecorderState> emit) async {
     emit(state.copyWith(status: RecordingStatus.loading));
     HapticFeedbackManager.trigger(HapticType.light);
+
     try {
+      if (kIsWeb) {
+        emit(
+          state.copyWith(
+            message:
+                "You are running on Web. Audio chunks will not be uploaded or saved locally.",
+            status: RecordingStatus.error,
+          ),
+        );
+        return;
+      }
       final hasMicPermission = await PermissionController.ensureMicPermission();
       final hasPhonePermission =
           await PermissionController.ensurePhonePermission();
+      final hasNotificationPermission =
+          await PermissionController.ensureNotificationPermission();
       if (!hasMicPermission) {
         emit(
           state.copyWith(
@@ -68,6 +85,15 @@ class RecorderBloc extends Bloc<RecorderEvent, RecorderState> {
             status: RecordingStatus.error,
             message:
                 "Phone call permission is required to start recording, for functionality",
+          ),
+        );
+        return;
+      }
+      if (!hasNotificationPermission) {
+        emit(
+          state.copyWith(
+            status: RecordingStatus.error,
+            message: "Notificatoion Permission is required for functionality",
           ),
         );
         return;
@@ -88,7 +114,10 @@ class RecorderBloc extends Bloc<RecorderEvent, RecorderState> {
         },
       );
 
-      _recorder = await RecorderService.create();
+      // _onDeviceSpeech = OnDeviceSpeechController();
+      // await _onDeviceSpeech.init();
+
+      _recorder = await RecorderService.create(sessionId: sessionId);
       _deepgram = DeepgramStreamingService(dotenv.env['DEEPGRAM_API_KEY']!);
 
       _deepgram.onTranscript = (text, isFinal) {
@@ -103,7 +132,7 @@ class RecorderBloc extends Bloc<RecorderEvent, RecorderState> {
       _recorder.decibelStream.listen((db) {
         add(UpdateWaveform(db: db));
       });
-      //add resume and pause to set method for pause 
+      //add resume and pause to set method for pause
       //and resume at phone call.
       _recorder.setCallHandlers(
         onCallEnded: () => add(ResumeRecording(isFromCall: true)),
@@ -122,6 +151,14 @@ class RecorderBloc extends Bloc<RecorderEvent, RecorderState> {
           waveform: [],
         ),
       );
+      // _onDeviceSpeech.start(
+      //   onResult: (text, isFinal) {
+      //     // debugPrint("text: $text");
+      //     // LIVE PREVIEW
+      //     add(TranscriptReceived(text: text, isFinal: isFinal));
+      //   },
+      // );
+
       stream.listen(
         (chunkPath) async {
           add(GenerateUploadChunkEvent(path: chunkPath));
@@ -133,7 +170,6 @@ class RecorderBloc extends Bloc<RecorderEvent, RecorderState> {
           log('recorder stream done');
         },
       );
-    
 
       // Start Notification
       await NotificationService.showRecordingNotification(
@@ -154,6 +190,7 @@ class RecorderBloc extends Bloc<RecorderEvent, RecorderState> {
 
     _recorder.stop();
     _deepgram.close();
+    // _onDeviceSpeech.cancel();
     _timer?.cancel();
     NotificationService.clear();
     emit(
@@ -171,6 +208,7 @@ class RecorderBloc extends Bloc<RecorderEvent, RecorderState> {
 
     _recorder.pause();
     _deepgram.close();
+    // _onDeviceSpeech.stop();
     _timer?.cancel();
 
     bool isAutoPause = event.isFromCall == true;
@@ -185,7 +223,7 @@ class RecorderBloc extends Bloc<RecorderEvent, RecorderState> {
     );
   }
 
-  void _onResume(ResumeRecording event, Emitter<RecorderState> emit) {
+  void _onResume(ResumeRecording event, Emitter<RecorderState> emit) async {
     _recorder.resume();
     HapticFeedbackManager.trigger(HapticType.light);
     _deepgram = DeepgramStreamingService(dotenv.env['DEEPGRAM_API_KEY']!);
@@ -195,6 +233,14 @@ class RecorderBloc extends Bloc<RecorderEvent, RecorderState> {
     };
 
     _deepgram.connect(); // reconnect
+
+    // Resume ON-DEVICE speech (LIVE PREVIEW) native
+    // await _onDeviceSpeech.init();
+    // _onDeviceSpeech.start(
+    //   onResult: (text, isFinal) {
+    //     add(TranscriptReceived(text: text, isFinal: isFinal));
+    //   },
+    // );
 
     emit(state.copyWith(status: RecordingStatus.recording, autoPause: false));
     _startTimer();
@@ -220,8 +266,9 @@ class RecorderBloc extends Bloc<RecorderEvent, RecorderState> {
     // chunkPath is local wav path
     int chunkNum = state.chunkNum;
     bool isLastChunck = state.isLast;
+
     // ---------- SAVE TO LOCAL DB ----------
-    final pending = PendingChunk(
+    final pending = PendingChunkModel(
       id: const Uuid().v4(),
       sessionId: state.sessionId!,
       chunkNumber: chunkNum,
@@ -262,9 +309,7 @@ class RecorderBloc extends Bloc<RecorderEvent, RecorderState> {
     emit(state.copyWith(currentDB: db, waveform: updatedList));
   }
 
-  FutureOr<void> _setGain(SetGainEvent event, Emitter<RecorderState> emit) {
-
-  }
+  FutureOr<void> _setGain(SetGainEvent event, Emitter<RecorderState> emit) {}
 
   FutureOr<void> _onTranscriptReceived(
     TranscriptReceived event,
@@ -275,5 +320,15 @@ class RecorderBloc extends Bloc<RecorderEvent, RecorderState> {
 
       emit(state.copyWith(liveTranscript: updated));
     }
+
+    // if (event.isFinal) {
+    // final segment → append
+    // final updated = ('${state.liveTranscript} ${event.text}').trim();
+
+    // emit(state.copyWith(liveTranscript: updated));
+    // } else {
+    // partial preview → UI only
+    //   emit(state.copyWith(liveTranscript: event.text));
+    // }
   }
 }

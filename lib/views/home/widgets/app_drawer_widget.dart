@@ -76,7 +76,6 @@ class AppDrawerWidget extends StatelessWidget {
             title: Text(AppLocalizations.of(context)!.homeTxt),
             onTap: () {
               Navigator.of(context).pop();
-            
             },
           ),
           const Spacer(),

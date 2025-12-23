@@ -106,6 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
 
       floatingActionButton: FloatingActionButton(
+        tooltip: AppLocalizations.of(context)!.addPatientTxt,
         child: Icon(Icons.person_add_alt),
         onPressed: () {
           HapticFeedbackManager.trigger(HapticType.light);

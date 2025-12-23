@@ -15,7 +15,7 @@ import 'routes_name.dart';
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-       case RoutesName.splashScreen:
+      case RoutesName.splashScreen:
         return MaterialPageRoute(builder: (context) => SplashScreen());
       case RoutesName.languageSelectorScreen:
         return MaterialPageRoute(

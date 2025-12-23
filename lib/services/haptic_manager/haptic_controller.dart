@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:ai_scribe_copilot/utils/enums.dart';
 
@@ -9,7 +10,7 @@ class HapticFeedbackManager {
       final bool enabled = await _channel.invokeMethod("isDndEnabled");
       return enabled;
     } catch (e) {
-      print("DND check failed: $e");
+      debugPrint("DND check failed: $e");
       return false;
     }
   }
@@ -18,11 +19,11 @@ class HapticFeedbackManager {
     final isDnd = await _isDndOn();
 
     if (isDnd) {
-      print("DND ON → Haptic blocked");
+      debugPrint("DND ON → Haptic blocked");
       return;
     }
 
-    print("HAPTIC TRIGGERED ($type) — DND OFF");
+    debugPrint("HAPTIC TRIGGERED ($type) — DND OFF");
 
     switch (type) {
       case HapticType.light:

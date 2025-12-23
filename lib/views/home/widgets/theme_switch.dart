@@ -14,7 +14,6 @@ class ThemeSwitch extends StatelessWidget {
         return Switch(
           value: _isDark(state.themeMode!),
           onChanged: (value) {
-          
             HapticFeedbackManager.trigger(HapticType.success);
             ThemeMode appTheme = (value) ? ThemeMode.dark : ThemeMode.light;
             context.read<LanguageThemeSelectorBloc>().add(

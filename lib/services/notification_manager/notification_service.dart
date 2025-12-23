@@ -74,8 +74,8 @@ class NotificationService {
       playSound: false,
       category: AndroidNotificationCategory.service,
       visibility: NotificationVisibility.public,
-      usesChronometer: true,
-      showWhen: true,
+      // usesChronometer: true,
+      // showWhen: true,
       actions: [
         AndroidNotificationAction('pause', 'Pause', showsUserInterface: true),
         AndroidNotificationAction('resume', 'Resume', showsUserInterface: true),
@@ -132,7 +132,7 @@ class NotificationService {
 
 @pragma('vm:entry-point')
 void notificationTapBackground(NotificationResponse response) {
-  print(
+  log(
     "➡️ BACKGROUND ACTION: actionId=${response.actionId}, payload=${response.payload}",
   );
 }

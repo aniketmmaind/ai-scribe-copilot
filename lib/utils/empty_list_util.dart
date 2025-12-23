@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class EmptyListUtil extends StatelessWidget {
@@ -54,7 +55,7 @@ class EmptyListUtil extends StatelessWidget {
                   ),
                 ),
 
-                if (actionText != null && onAction != null) ...[
+                if (kIsWeb) ...[
                   const SizedBox(height: 20),
                   ElevatedButton(onPressed: onAction, child: Text(actionText!)),
                 ],

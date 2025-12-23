@@ -26,6 +26,35 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<!-- Microphone -->
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app records audio for medical note transcription.</string>
+
+	<!-- Speech recognition -->
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>This app converts speech into text for medical notes.</string>
+
+	<!-- Camera -->
+	<key>NSCameraUsageDescription</key>
+	<string>This app uses the camera to capture images.</string>
+
+	<!-- Photo library -->
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app accesses photos to attach images.</string>
+
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>This app saves images to your photo library.</string>
+
+	<!-- Notifications -->
+	<key>NSUserNotificationUsageDescription</key>
+	<string>This app sends notifications for ongoing recordings.</string>
+
+	<!-- Background execution -->
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+		<string>processing</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

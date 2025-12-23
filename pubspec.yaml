@@ -35,22 +35,18 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
     # audio recording + level meter
-  flutter_sound: ^9.2.13
+  # flutter_sound: ^9.2.13
 
 
-  # persistence
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   path_provider: ^2.0.11
 
-  # networking
   http: ^1.2.1
   connectivity_plus: ^4.0.1
 
-  # background/foreground support (android)
   flutter_foreground_task: 
 
-  # utils
   uuid: ^3.0.7
   permission_handler: ^12.0.1
   vibration: ^3.1.4
@@ -75,9 +71,8 @@ dependencies:
   image: ^4.6.0
   share_plus: ^12.0.1
   image_picker: ^1.1.2
+  speech_to_text: ^7.3.0
 
-  # optional on-device speech recognition
-  # speech_to_text: ^5.8.0
 
 dev_dependencies:
   flutter_test:
