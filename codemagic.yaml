@@ -2,6 +2,8 @@ workflows:
   medinote_free_build:
     name: Medinote Free CI Build
     environment:
+      groups:
+        - medinote_env
       flutter: stable
       vars:
         BASE_URL: $BASE_URL
