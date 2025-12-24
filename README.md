@@ -68,7 +68,7 @@ flowchart TD
 👉 **Download APK (Release Build)**  
 [APK Link](https://drive.google.com/file/d/1wTBWVN-ynq5NkfEGvf8nOdtLXXOzLwMq/view?usp=sharing)
 
-> Download the latest `app-release.apk` from GitHub Releases and install it on your Android device.
+> Download the latest `app-release.apk` from this Google Drive link Releases and install it on your Android device.
 
 ---
 
@@ -83,7 +83,7 @@ flowchart TD
 
 ## 🌐 Backend Deployment URL
 
-The backend API is deployed on **Google Cloud Run**: [BaseUrl](
+The backend API is deployed on **Google Cloud Run**: **BaseUrl:**  [BaseUrl](
 https://medinote-backend-staging-520509474930.asia-south1.run.app)
 
 ---
