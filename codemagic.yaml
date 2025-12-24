@@ -13,16 +13,18 @@ workflows:
       # Always start clean in CI
       - flutter clean
 
+      # Create .env file dynamically
+      - |
+          echo "BASE_URL=$BASE_URL" >> .env
+          echo "DEEPGRAM_API_KEY=$DEEPGRAM_API_KEY" >> .env
+      
       # Get dependencies
       - flutter pub get
 
       # Force localization & flutter_gen generation
       - flutter gen-l10n
 
-      # Create .env file dynamically
-      - |
-          echo "BASE_URL=$BASE_URL" >> .env
-          echo "DEEPGRAM_API_KEY=$DEEPGRAM_API_KEY" >> .env
+      - ls .dart_tool/flutter_gen/gen_l10n
 
       # Build outputs
       - flutter build apk --release
