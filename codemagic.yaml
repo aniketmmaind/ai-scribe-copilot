@@ -24,7 +24,7 @@ workflows:
       - flutter gen-l10n
 
       # Debug check (safe now)
-      - ls .dart_tool/flutter_gen/gen_l10n
+      # - ls .dart_tool/flutter_gen/gen_l10n
 
       - flutter build apk --release
       - flutter build web
