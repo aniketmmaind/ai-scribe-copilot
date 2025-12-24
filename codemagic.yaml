@@ -10,13 +10,21 @@ workflows:
         DEEPGRAM_API_KEY: $DEEPGRAM_API_KEY
 
     scripts:
+      # Always start clean in CI
+      - flutter clean
+
+      # Get dependencies
       - flutter pub get
+
+      # Force localization & flutter_gen generation
+      - flutter gen-l10n
 
       # Create .env file dynamically
       - |
-        echo "BASE_URL=$BASE_URL" >> .env
-        echo "DEEPGRAM_API_KEY=$DEEPGRAM_API_KEY" >> .env
+          echo "BASE_URL=$BASE_URL" >> .env
+          echo "DEEPGRAM_API_KEY=$DEEPGRAM_API_KEY" >> .env
 
+      # Build outputs
       - flutter build apk --release
       - flutter build web
 
