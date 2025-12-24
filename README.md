@@ -66,7 +66,7 @@ flowchart TD
 ## 📱 Android APK Download
 
 👉 **Download APK (Release Build)**  
-<https://github.com/><your-username>/<repo-name>/releasesl
+[APK Link](https://drive.google.com/file/d/1wTBWVN-ynq5NkfEGvf8nOdtLXXOzLwMq/view?usp=sharing)
 
 > Download the latest `app-release.apk` from GitHub Releases and install it on your Android device.
 
@@ -167,7 +167,7 @@ flutter build apk --release
 
 ## 📦 Codemagic Build Artifacts
 
-Google Drive : [Link] (<https://drive.google.com/drive/folders/1S1g6-VzW8wXWLMY68d8C5cDtdWuyj6QS?usp=sharing>)
+Google Drive : [Link](https://drive.google.com/drive/folders/1S1g6-VzW8wXWLMY68d8C5cDtdWuyj6QS?usp=sharing)
 
 - Android APK
 - Web Build ZIP
