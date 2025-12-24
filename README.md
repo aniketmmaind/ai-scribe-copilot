@@ -78,9 +78,9 @@ flowchart TD
 ## 📱 Android APK Download
 
 👉 **Download APK (Release Build)**  
-[APK Link](https://drive.google.com/file/d/1wTBWVN-ynq5NkfEGvf8nOdtLXXOzLwMq/view?usp=sharing)
+[APK Link](https://github.com/aniketmmaind/ai-scribe-copilot/releases/download/v1.0.0/app-release.apk)
 
-> Download the latest `app-release.apk` from this Google Drive link Releases and install it on your Android device.
+> Download the latest `app-release.apk` from this GitHub Release link install it on your Android device.
 
 ---
 
@@ -89,7 +89,7 @@ flowchart TD
 👉 **Demo Video (All Features)**  
 [Video Link](https://www.loom.com/share/c1dd7be72edd40e69e2e2eaa139a2271)
 
-> This video demonstrates authentication, patient flow, audio recording, and transcription.
+> This video demonstrates authentication, patient flow, audio recording, test cases and transcription.
 
 ---
 
