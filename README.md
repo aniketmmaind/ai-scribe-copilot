@@ -89,7 +89,7 @@ flowchart TD
 👉 **Demo Video (All Features)**  
 [Video Link](https://www.loom.com/share/c1dd7be72edd40e69e2e2eaa139a2271)
 
-> This video demonstrates authentication, patient flow, audio recording, and transcription.
+> This video demonstrates authentication, patient flow, audio recording, test cases and transcription.
 
 ---
 
