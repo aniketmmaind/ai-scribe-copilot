@@ -36,7 +36,7 @@ migrate_working_dir/
 /lib/temp.dart
 /lib/services/api_service.dart
 /lib/services/upload_manager.dart
-
+/apks/
 # Symbolication related
 app.*.symbols
 
