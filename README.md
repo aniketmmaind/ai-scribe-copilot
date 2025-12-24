@@ -75,7 +75,7 @@ flowchart TD
 ## 🎥 Demo Video (Loom)
 
 👉 **Demo Video (All Features)**  
-<https://loom.com/share/><your-loom-video-id>
+[Video Link](https://www.loom.com/share/c1dd7be72edd40e69e2e2eaa139a2271)
 
 > This video demonstrates authentication, patient flow, audio recording, and transcription.
 
@@ -84,7 +84,7 @@ flowchart TD
 ## 🌐 Backend Deployment URL
 
 The backend API is deployed on **Google Cloud Run**: [BaseUrl](
-https://medi-note-api-assign-520509474930.asia-south1.run.app/)
+https://medinote-backend-staging-520509474930.asia-south1.run.app)
 
 ---
 
@@ -164,6 +164,15 @@ flutter build apk --release
 #### Generated APK Path
 
 ```build/app/outputs/flutter-apk/app-release.apk```
+
+## 📦 Codemagic Build Artifacts
+
+Google Drive : [Link] (<https://drive.google.com/drive/folders/1S1g6-VzW8wXWLMY68d8C5cDtdWuyj6QS?usp=sharing>)
+
+- Android APK
+- Web Build ZIP
+
+---
 
 ## 🏗️ Backend Integration Overview
 
