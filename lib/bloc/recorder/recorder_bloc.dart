@@ -301,7 +301,7 @@ class RecorderBloc extends Bloc<RecorderEvent, RecorderState> {
 
     final updatedList = List<double>.from(state.waveform)..add(db);
 
-    // keep only last 20 bars
+    // keep only last  bars
     if (updatedList.length > 50) {
       updatedList.removeAt(0);
     }

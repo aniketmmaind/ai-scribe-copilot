@@ -78,8 +78,7 @@ class NetworkServicesApi implements BaseApiServices {
       final retryResponse = await request(newToken);
       return httpResponse(retryResponse);
     } on InvalidCredentialsException {
-      // 🚫 DO NOT refresh
-
+      // refresh
       rethrow;
     } on SocketException catch (e) {
       if (e.message.contains('Failed host lookup')) {
