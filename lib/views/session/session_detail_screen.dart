@@ -1,7 +1,7 @@
 import 'package:ai_scribe_copilot/utils/app_bar_util.dart';
 import 'package:ai_scribe_copilot/utils/snackbar_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:ai_scribe_copilot/l10n/app_localizations.dart';
 
 import '../../utils/share_data_util.dart';
 

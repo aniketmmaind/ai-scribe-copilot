@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/patient_details/patient_detail_bloc.dart';
 import '../../models/patients/patient_detail_model.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:ai_scribe_copilot/l10n/app_localizations.dart';
 
 import 'widgets/patient_info_section.dart';
 part 'widgets/record_button_widget.dart';

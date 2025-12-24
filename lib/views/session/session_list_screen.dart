@@ -9,7 +9,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:ai_scribe_copilot/l10n/app_localizations.dart';
 import '../../utils/app_bar_util.dart';
 part 'widgets/session_app_bar.dart';
 part 'widgets/session_list_item.dart';

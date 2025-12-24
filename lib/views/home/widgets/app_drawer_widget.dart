@@ -2,7 +2,7 @@ import 'package:ai_scribe_copilot/config/routes/routes_name.dart';
 import 'package:ai_scribe_copilot/services/session_manager/session_controller.dart';
 import 'package:ai_scribe_copilot/views/home/widgets/theme_switch.dart';
 import 'package:ai_scribe_copilot/views/langtheme/widgets/lang_dropdown_widget.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:ai_scribe_copilot/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/confirmation_dialog_util.dart';

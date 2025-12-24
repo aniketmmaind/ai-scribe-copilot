@@ -12,7 +12,7 @@ import '../../services/session_manager/session_controller.dart';
 import '../../utils/app_button_util.dart';
 import '../../utils/confirmation_dialog_util.dart';
 import '../../utils/share_data_util.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:ai_scribe_copilot/l10n/app_localizations.dart';
 
 part 'widgets/mic_plus_animation.dart';
 part 'widgets/record_controller.dart';

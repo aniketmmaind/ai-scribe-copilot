@@ -1,7 +1,7 @@
 import 'package:ai_scribe_copilot/bloc/lang_theme_selector/lang_selector_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:ai_scribe_copilot/l10n/app_localizations.dart';
 import '../../../utils/dropdown_util.dart';
 
 class ThemeDropdownWidget extends StatelessWidget {

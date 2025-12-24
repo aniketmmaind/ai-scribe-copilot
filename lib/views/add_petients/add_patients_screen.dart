@@ -9,7 +9,7 @@ import 'package:ai_scribe_copilot/utils/enums.dart';
 import 'package:ai_scribe_copilot/utils/snackbar_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:ai_scribe_copilot/l10n/app_localizations.dart';
 import '../../utils/app_button_util.dart';
 
 part '../add_petients/widgets/background_textfield_widget.dart';

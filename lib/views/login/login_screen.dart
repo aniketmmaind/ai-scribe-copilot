@@ -3,7 +3,7 @@ import 'package:ai_scribe_copilot/config/routes/routes_name.dart';
 import 'package:ai_scribe_copilot/utils/snackbar_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:ai_scribe_copilot/l10n/app_localizations.dart';
 import '../../utils/app_button_util.dart';
 import '../../utils/app_textfield_util.dart';
 import '../../bloc/password_toggle/password_toggle_bloc.dart';

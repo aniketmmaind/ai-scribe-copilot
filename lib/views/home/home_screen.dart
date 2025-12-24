@@ -7,7 +7,7 @@ import 'package:ai_scribe_copilot/views/home/widgets/app_drawer_widget.dart';
 import 'package:ai_scribe_copilot/views/home/widgets/home_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:ai_scribe_copilot/l10n/app_localizations.dart';
 
 import '../../config/routes/routes_name.dart';
 import '../../services/haptic_manager/haptic_controller.dart';

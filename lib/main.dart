@@ -6,6 +6,7 @@ import 'package:ai_scribe_copilot/bloc/patient_details/patient_detail_bloc.dart'
 import 'package:ai_scribe_copilot/bloc/recorder/recorder_bloc.dart';
 import 'package:ai_scribe_copilot/bloc/recorder/recorder_event.dart';
 import 'package:ai_scribe_copilot/bloc/session/session_bloc.dart';
+import 'package:ai_scribe_copilot/l10n/app_localizations.dart';
 import 'package:ai_scribe_copilot/services/notification_manager/notification_service.dart';
 import 'package:flutter/services.dart';
 import 'bloc/audio_route/audio_route_bloc.dart';
@@ -14,7 +15,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'config/routes/routes.dart';
 import 'config/routes/routes_name.dart';
 

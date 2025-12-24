@@ -5,7 +5,7 @@ import 'package:ai_scribe_copilot/utils/app_bar_util.dart';
 import 'package:ai_scribe_copilot/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:ai_scribe_copilot/l10n/app_localizations.dart';
 part 'detail_card.dart';
 part 'info_row.dart';
 part 'section_title.dart';
