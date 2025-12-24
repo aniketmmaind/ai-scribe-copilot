@@ -1,6 +1,7 @@
 workflows:
   medinote_free_build:
     name: Medinote Free CI Build
+
     environment:
       groups:
         - medinote_env
@@ -10,23 +11,21 @@ workflows:
         DEEPGRAM_API_KEY: $DEEPGRAM_API_KEY
 
     scripts:
-      # Always start clean in CI
       - flutter clean
 
-      # Create .env file dynamically
+      # Create .env early
       - |
-          echo "BASE_URL=$BASE_URL" >> .env
+          echo "BASE_URL=$BASE_URL" > .env
           echo "DEEPGRAM_API_KEY=$DEEPGRAM_API_KEY" >> .env
-      
-      # Get dependencies
+
       - flutter pub get
 
-      # Force localization & flutter_gen generation
+      # Generate localization
       - flutter gen-l10n
 
+      # Debug check (safe now)
       - ls .dart_tool/flutter_gen/gen_l10n
 
-      # Build outputs
       - flutter build apk --release
       - flutter build web
 
