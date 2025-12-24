@@ -66,7 +66,7 @@ flowchart TD
 ## 📱 Android APK Download
 
 👉 **Download APK (Release Build)**  
-<https://github.com/><your-username>/<repo-name>/releases
+<https://github.com/><your-username>/<repo-name>/releasesl
 
 > Download the latest `app-release.apk` from GitHub Releases and install it on your Android device.
 
