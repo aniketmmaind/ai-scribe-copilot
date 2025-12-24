@@ -23,6 +23,9 @@ workflows:
       # Generate localization
       - flutter gen-l10n
 
+      # FORCE REFRESH: This tells the compiler where the new files are
+      - flutter pub get
+
       # Debug check (safe now)
       # - ls .dart_tool/flutter_gen/gen_l10n
 
